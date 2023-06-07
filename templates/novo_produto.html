@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <link rel="icon" href="{{ url_for('static', filename='img/icon.png') }}" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MeuEstoque - Novo Produto</title>
+
+    <!-- Bibliotecas CSS -->
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  </head>
+  <body>
+    {% include 'navbar.html' %}
+
+    <div class="container">
+      <h1>Novo Produto</h1>
+      <form method="POST" onsubmit="return validateForm()">
+        <div class="form-group">
+          <label for="name">Nome</label>
+          <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="category">Categoria</label>
+          <select class="form-control" id="category" name="category" required>
+            {% for category in categories %}
+              <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="quantity">Quantidade em Estoque</label>
+          <input type="number" class="form-control" id="quantity" name="quantity" required>
+        </div>
+        <div class="form-group">
+          <label for="supplier">Fornecedor</label>
+          <input type="text" class="form-control" id="supplier" name="supplier">
+        </div>
+        <div class="form-group">
+          <label for="purchase_price">Valor de Compra</label>
+          <input type="number" class="form-control" id="purchase_price" name="purchase_price" step="0.01" required>
+        </div>
+        <div class="form-group">
+          <label for="sale_price">Valor de Venda</label>
+          <input type="number" class="form-control" id="sale_price" name="sale_price" step="0.01" required>
+          <small id="sale_price_help" class="form-text text-muted">O valor de venda deve ser maior que o valor de compra.</small>
+        </div>
+        <button type="submit" class="btn btn-primary">Adicionar</button>
+      </form>
+    </div>
+
+    <!-- Bibliotecas JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  </body>
+</html>

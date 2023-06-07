@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <link rel="icon" href="{{ url_for('static', filename='img/icon.png') }}" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MeuEstoque - Estoque</title>
+
+    <!-- Bibliotecas CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+  </head>
+  <body>
+    {% include 'navbar.html' %}
+
+    <div class="container">
+      <h1>Estoque</h1>
+
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      <div class="alert alert-success">
+        <ul>
+          {% for message in messages %}
+          <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+      {% endwith %}
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Categoria</th>
+            <th scope="col">Quantidade</th>
+            <th scope="col">Fornecedor</th>
+            <th scope="col">Valor de Compra</th>
+            <th scope="col">Valor de Venda</th>
+            <th scope="col">Editar</th>
+            <th scope="col">Excluir</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for product in products %}
+            <tr>
+              <td>{{ product.name }}</td>
+              <td>{{ product.category.name }}</td>
+              <td>{{ product.quantity }}</td>
+              <td>{{ product.supplier }}</td>
+              <td>{{ product.purchase_price }}</td>
+              <td>{{ product.sale_price }}</td>
+              <td><a href="/editar_produto/{{ product.id }}"><i class="fas fa-pencil-alt"></i></a></td>
+              <td><a href="/excluir_produto/{{ product.id }}" onclick="return confirm('Tem certeza que deseja excluir este produto?')"><i class="fas fa-trash"></i></a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Bibliotecas JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  </body>
+</html>
