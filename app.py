@@ -3,11 +3,11 @@ from flask_sqlalchemy import SQLAlchemy
 import pymysql
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://well:123456@localhost/MeuEstoque"
+app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+pymysql://username:password@localhost/MeuEstoque"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 # Defina a chave secreta
-app.secret_key = "@#fkaishasd"
+app.secret_key = "your_secret_key"
 
 # Cria a instância do SQLAlchemy com o app
 db = SQLAlchemy(app)
